@@ -41,24 +41,18 @@ jobs:
         run: python ${{ github.workspace }}/iptvzby.py
 
       # 提交更改步骤
-      - name: Commit and push if changed
+      - name: 提交更改
         run: |
           # 设置 Git 用户邮箱
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           # 设置 Git 用户名称
           git config --local user.name "github-actions[bot]"
-          # 查看当前更改
-          git diff
-          # 获取最终文件路径
-          final_file=$(python -c '
-          try: 
-            import user_config as config
-          except ImportError: 
-            import config
-          print(config.final_file)')
-
-          # 如果暂存区有更改，则提交并强制推送
-          if! git diff --staged --quiet; then
-            git commit -m "Github Action Auto Updated"
-            git push --force
-          fi
+          # 将所有.txt 文件添加到暂存区
+          git add.
+          # 提交暂存区的.txt 文件并添加注释
+          git commit *.txt -m "Add generated file"
+          # 可以注释掉下面两行，如果需要提交.m3u 文件可取消注释
+          #git commit *.m3u -m "Add generated file"
+          #git pull --rebase
+          # 强制推送更改到仓库，需谨慎使用
+          git push -f
