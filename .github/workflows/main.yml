@@ -44,9 +44,9 @@ jobs:
       - name: 提交更改
         run: |
           # 设置 Git 用户邮箱
-         # git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "1523719154@qq.com"
           # 设置 Git 用户名称
-         # git config --local user.name "github-actions[bot]"
+          git config --local user.name "ahgu86"
           # 将所有.txt 文件添加到暂存区
           git add.
           # 提交暂存区的.txt 文件并添加注释
