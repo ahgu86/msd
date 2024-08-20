@@ -1,39 +1,58 @@
 name: iptvzby
 
+# 触发条件
 on:
+  # 定时任务，每天 6 点 30 分和 22 点 30 分执行
   schedule:
     - cron: '30 6,22 * * *'
+  # 当 main 分支有推送时触发
   push:
     branches:
       - main
+
+# 权限设置
 permissions:
   contents: write
-  
+
+# 任务定义
 jobs:
   build:
+    # 指定运行环境为最新的 Ubuntu
     runs-on: ubuntu-latest
 
     steps:
+      # 检出代码步骤
       - name: Checkout code
         uses: actions/checkout@v2
-    
+
+      # 设置 Python 环境步骤
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
+          # 指定 Python 版本为 3.x
           python-version: 3.x
 
+      # 安装依赖步骤
       - name: Install dependencies
         run: pip install selenium requests futures eventlet
 
+      # 运行 iptv 脚本步骤
       - name: Run iptv
         run: python ${{ github.workspace }}/iptvzby.py
 
+      # 提交更改步骤
       - name: 提交更改
         run: |
+          # 设置 Git 用户邮箱
           git config --local user.email "1523719154@qq.com"
+          # 设置 Git 用户名称
           git config --local user.name "ahgu86"
-          git add .
+          # 将所有.txt 文件添加到暂存区
+          git add.
+          # 提交暂存区的.txt 文件并添加注释
           git commit *.txt -m "Add generated file"
-          # git commit *.m3u -m "Add generated file"
+          # 可以注释掉下面两行，如果需要提交.m3u 文件可取消注释
+          #git commit *.m3u -m "Add generated file"
           #git pull --rebase
+          # 强制推送更改到仓库，需谨慎使用
           git push -f
