@@ -56,17 +56,7 @@ jobs:
           except ImportError: 
             import config
           print(config.final_file)')
-          # 如果最终文件存在，则添加到暂存区
-          if [[ -f "$final_file" ]]; then
-            git add -f "$final_file"
-          fi
-          # 如果 user_result.log 文件存在，则添加到暂存区
-          if [[ -f user_result.log ]]; then
-            git add -f user_result.log
-          # 如果 user_result.log 不存在但 result.log 存在，则添加到暂存区
-          elif [[ -f result.log ]]; then
-            git add -f result.log
-          fi
+
           # 如果暂存区有更改，则提交并强制推送
           if! git diff --staged --quiet; then
             git commit -m "Github Action Auto Updated"
