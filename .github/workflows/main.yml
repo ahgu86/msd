@@ -1,14 +1,14 @@
-name: iptvzby
+#name: iptvzby
 
 # 触发条件
-on:
+#on:
   # 定时任务，每天 6 点 30 分和 22 点 30 分执行
-  schedule:
-    - cron: '30 6,22 * * *'
+#  schedule:
+#    - cron: '30 6,22 * * *'
   # 当 main 分支有推送时触发
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
 
 # 权限设置
 permissions:
